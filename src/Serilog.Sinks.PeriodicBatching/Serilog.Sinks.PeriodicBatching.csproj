@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>Buffer batches of log events to be flushed asynchronously.</Description>
     <VersionPrefix>3.1.1</VersionPrefix>
     <Authors>Serilog Contributors</Authors>
-    <TargetFrameworks>net45;netstandard1.1;netstandard1.2;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RootNamespace>Serilog</RootNamespace>
     <PackageTags>serilog;batching;timer</PackageTags>
@@ -15,31 +15,13 @@
     <RepositoryType>git</RepositoryType>
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
   </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.2' ">
-    <DefineConstants>$(DefineConstants);FEATURE_THREADING_TIMER</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45' or '$(TargetFramework)' == 'netstandard2.0' ">
-    <DefineConstants>$(DefineConstants);FEATURE_THREADING_TIMER;FEATURE_EXECUTION_CONTEXT</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
-    <DefineConstants>$(DefineConstants);FEATURE_THREADING_TIMER;FEATURE_EXECUTION_CONTEXT;FEATURE_ASYNCDISPOSABLE</DefineConstants>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Serilog" Version="2.0.0" />
-  </ItemGroup>
-    
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
     
   <ItemGroup>
     <None Include="..\..\assets\icon.png" Pack="true" Visible="false" PackagePath="" />
-    <PackageReference Include="Nullable" Version="1.3.1" PrivateAssets="All" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\serilog\src\Serilog\Serilog.csproj" />
   </ItemGroup>
 
 </Project>

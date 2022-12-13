@@ -38,18 +38,22 @@ class BoundedConcurrentQueue<T>
     public bool TryDequeue(out T item)
     {
         if (_queueLimit == Unbounded)
+#pragma warning disable CS8601 // Possible null reference assignment.
             return _queue.TryDequeue(out item);
+#pragma warning restore CS8601 // Possible null reference assignment.
 
         var result = false;
         try
         { }
         finally // prevent state corrupt while aborting
         {
+#pragma warning disable CS8601 // Possible null reference assignment.
             if (_queue.TryDequeue(out item))
             {
                 Interlocked.Decrement(ref _counter);
                 result = true;
             }
+#pragma warning restore CS8601 // Possible null reference assignment.
         }
 
         return result;
